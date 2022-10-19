@@ -5,6 +5,9 @@ let goBtnEl = document.getElementById('go-btn');
 let menuEl = document.getElementById('menu');
 let outputEl = document.getElementById('output');
 
+//GLOBAL VARIABLES
+let contacts = loadcontacts();
+
 // Go Btn - Menu Listener
 goBtnEl.addEventListener('click', goBtnHandler);
 
@@ -26,22 +29,74 @@ function goBtnHandler() {
 }
 
 // MENU FUNCTIONS
+
+//DISPLAY CONTACTS
 function displayContacts() {
-  console.log('Display Contacts');
+  let output = "";
+  for (let i = 0; i < contacts.length; i++){
+    output += gethtmlstr(contacts[i], i);
+  }
+  outputEl.innerHTML = output;
 }
 
+//ADD A CONTACT
 function addContact() {
-  console.log('Add Contact');
+  let name = prompt("say your name");
+  let number = prompt("what is your number");
+  let email = prompt("EMAIL");
+  let contry = prompt("where do you live");
+  contacts.push(newcontact(name, number, email, contry));
+  outputEl.innerHTML = "contact has been addded";
+  savecontacts();
 }
 
+//REMOVE A CONTACT
 function removeContact() {
-  console.log('Remove Contact');
+  let index = prompt("enter the number of the contact");
+  if (index >= 0 && index < contacts.length){
+    contacts.splice(index, 1);
+    savecontacts();
+  } else {
+    alert("no");
+  }
 }
 
+//DISPLAY BY NAME
 function displayByName() {
   console.log('Display by Name');
 }
 
+//DISPLAY BY COUNTRY
 function displayByCountry() {
   console.log('Display by Country');
+}
+
+//OTHER FUNCTIONS
+
+function newcontact(contactname, contactnumber, contactemail, contactcontry){
+  return {
+    name: contactname,
+    number: contactnumber,
+    email: contactemail,
+    contry: contactcontry,
+  }
+}
+
+function gethtmlstr(contacts, i){
+  return `
+    <div> 
+      ${i}: ${contacts.name}
+    </div>
+  `
+}
+
+//STORAGE FUNCTIONS
+
+function savecontacts(){
+  localStorage.setItem("contacts", JSON.stringify(contacts));
+}
+
+function loadcontacts(){
+  let contactstr = localStorage.getItem("contacts");
+  return JSON.parse(contactstr) ?? [];
 }
