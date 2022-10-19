@@ -85,7 +85,7 @@ function newcontact(contactname, contactnumber, contactemail, contactcontry){
 function gethtmlstr(contacts, i){
   return `
     <div> 
-      ${i}: ${contacts.name}
+      ${i}: ${contacts.name + ", Number: " + contacts.number}
     </div>
   `
 }
