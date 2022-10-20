@@ -55,6 +55,7 @@ function removeContact() {
   let index = prompt("enter the number of the contact");
   if (index >= 0 && index < contacts.length){
     contacts.splice(index, 1);
+    outputEl.innerHTML = `contact removed`;
     savecontacts();
   } else {
     alert("no");
@@ -63,12 +64,26 @@ function removeContact() {
 
 //DISPLAY BY NAME
 function displayByName() {
-  console.log('Display by Name');
+  let inputel = prompt("what is name");
+  let divstr = "";
+  for (let i = 0; i < contacts.length; i++){ 
+    if (contacts.name.includes(inputel)){
+        divstr += `<div>${contacts[i]}</div>`;
+    }           
+}
+  containerEl.innerHTML = divstr;
 }
 
 //DISPLAY BY COUNTRY
 function displayByCountry() {
-  console.log('Display by Country');
+  let inputel = prompt("what is contry");
+  let divstr = "";
+  for (let i = 0; i < contacts.length; i++){ 
+    if (contacts.contry.includes(inputel)){
+        divstr += `<div>${contacts[i]}</div>`;
+    }           
+}
+  containerEl.innerHTML = divstr;
 }
 
 //OTHER FUNCTIONS
@@ -85,7 +100,7 @@ function newcontact(contactname, contactnumber, contactemail, contactcontry){
 function gethtmlstr(contacts, i){
   return `
     <div> 
-      ${i}: ${contacts.name + ", Number: " + contacts.number}
+      ${i}: ${contacts.name + ", Number: " + contacts.number + ", Email: " + contacts.email + ", Location: " + contacts.contry}
     </div>
   `
 }
