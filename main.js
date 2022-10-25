@@ -46,8 +46,8 @@ function addContact() {
   let email = prompt("EMAIL");
   let contry = prompt("where do you live");
   contacts.push(newcontact(name, number, email, contry));
-  for (let i = 0; i < contacts.length; i++){}
-  outputEl.innerHTML = `contact has been addded(${contacts.name}`;
+  let ip = contacts.length - 1;
+  outputEl.innerHTML = `contact has been addded(${contacts.name[ip]})`;
   savecontacts();
 }
 
