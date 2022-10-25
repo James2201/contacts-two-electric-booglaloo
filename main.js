@@ -47,7 +47,7 @@ function addContact() {
   let contry = prompt("where do you live");
   contacts.push(newcontact(name, number, email, contry));
   let ip = contacts.length - 1;
-  outputEl.innerHTML = `contact has been addded(${contacts.name[ip]})`;
+  outputEl.innerHTML = `contact has been addded(${contacts[ip].name})`;
   savecontacts();
 }
 
@@ -56,7 +56,7 @@ function removeContact() {
   let index = +prompt("enter the number of the contact");
     if (index >= 0 && index < contacts.length){
       contacts.splice(index, 1);
-      outputEl.innerHTML = `contact removed (${contacts[index]})`;
+      outputEl.innerHTML = `contact removed contact number: (${index})`;
     } else {
       alert("no");
     }
