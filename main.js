@@ -46,20 +46,22 @@ function addContact() {
   let email = prompt("EMAIL");
   let contry = prompt("where do you live");
   contacts.push(newcontact(name, number, email, contry));
-  outputEl.innerHTML = "contact has been addded";
+  for (let i = 0; i < contacts.length; i++){}
+  outputEl.innerHTML = `contact has been addded(${contacts.name}`;
   savecontacts();
 }
 
 //REMOVE A CONTACT
 function removeContact() {
-  let index = prompt("enter the number of the contact");
-  if (index >= 0 && index < contacts.length){
-    contacts.splice(index, 1);
-    outputEl.innerHTML = `contact removed`;
-    savecontacts();
-  } else {
-    alert("no");
-  }
+  let index = +prompt("enter the number of the contact");
+    if (index >= 0 && index < contacts.length){
+      contacts.splice(index, 1);
+      outputEl.innerHTML = `contact removed (${contacts[index]})`;
+    } else {
+      alert("no");
+    }
+  
+  savecontacts();
 }
 
 //DISPLAY BY NAME
@@ -67,7 +69,7 @@ function displayByName() {
   let inputel = prompt("what is name");
   let divstr = "";
   for (let i = 0; i < contacts.length; i++){ 
-    if (contacts.includes(inputel)){
+    if (contacts.name.includes(inputel)){
         divstr += `<div>${contacts[i]}</div>`;
     }           
 }
@@ -79,7 +81,7 @@ function displayByCountry() {
   let inputel = prompt("what is contry");
   let divstr = "";
   for (let i = 0; i < contacts.length; i++){ 
-    if (contacts.includes(inputel)){
+    if (contacts.contry.includes(inputel)){
         divstr += `<div>${contacts[i]}</div>`;
     }           
 }
@@ -94,7 +96,7 @@ function newcontact(contactname, contactnumber, contactemail, contactcontry){
     number: contactnumber,
     email: contactemail,
     contry: contactcontry,
-  }
+  } 
 }
 
 function gethtmlstr(contacts, i){
