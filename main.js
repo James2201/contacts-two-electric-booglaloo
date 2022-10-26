@@ -56,7 +56,7 @@ function removeContact() {
   let index = +prompt("enter the number of the contact");
     if (index >= 0 && index < contacts.length){
       contacts.splice(index, 1);
-      outputEl.innerHTML = `contact removed contact number: (${index})`;
+      outputEl.innerHTML = `contact removed contact number: (${contacts[index]})`;
     } else {
       alert("no");
     }
