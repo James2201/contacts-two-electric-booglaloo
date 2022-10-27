@@ -69,7 +69,7 @@ function displayByName() {
   let inputel = prompt("what is name");
   let divstr = "";
   for (let i = 0; i < contacts.length; i++){ 
-    if (contacts.name.includes(inputel)){
+    if (contacts.includes(inputel)){
         divstr += `<div>${contacts[i]}</div>`;
     }           
 }
@@ -81,7 +81,7 @@ function displayByCountry() {
   let inputel = prompt("what is contry");
   let divstr = "";
   for (let i = 0; i < contacts.length; i++){ 
-    if (contacts.contry.includes(inputel)){
+    if (contacts.includes(inputel)){
         divstr += `<div>${contacts[i]}</div>`;
     }           
 }
