@@ -25,6 +25,8 @@ function goBtnHandler() {
     displayByName();
   } else if (selection === 'display-country') {
     displayByCountry();
+  } else if (selection === "find-by-email"){
+    findbyemail();
   }
 }
 
@@ -45,21 +47,43 @@ function addContact() {
   let number = prompt("what is your number");
   let email = prompt("EMAIL");
   let contry = prompt("where do you live");
+  let result = 0;
+
+  for (let i = 0; i < contacts.length; i++){
+    if (contacts[i].email.includes(email)){
+      result = 1;
+    }
+  }
+  if (result === 1){
+    outputEl.innerHTML = "NO"
+  } else {
   contacts.push(newcontact(name, number, email, contry));
   let ip = contacts.length - 1;
   outputEl.innerHTML = `contact has been addded(${contacts[ip].name})`;
   savecontacts();
+  }
 }
 
 //REMOVE A CONTACT
 function removeContact() {
-  let index = +prompt("enter the number of the contact");
-    if (index >= 0 && index < contacts.length){
-      contacts.splice(index, 1);
-      outputEl.innerHTML = `contact removed contact number: (${contacts[index]})`;
-    } else {
-      alert("no");
+  let index = prompt("enter the email of the contact");
+  let answer = -1;
+  for (let i = 0; i < contacts.length; i++){
+    if (contacts[i].email.includes(index)){
+      answer = i;
+      outputEl.innerHTML = `contact removed, contact email: (${contacts[i].name})`
+      contacts.splice(answer, 1);
+    } else if (answer === -1) {
+      outputEl.innerHTML = "NO"
     }
+  }
+    // if (index >= 0 && index < contacts.length){
+    //   outputEl.innerHTML = `contact removed, contact email: (${contacts[index].name})`;
+    //   contacts.splice(index, 1);
+    //   console.log(index);
+    // } else {
+    //   alert("no");
+    // }
   
   savecontacts();
 }
@@ -69,10 +93,10 @@ function displayByName() {
   let inputel = prompt("what is name");
   let divstr = "";
   for (let i = 0; i < contacts.length; i++){ 
-    if (contacts.includes(inputel)){
-        divstr += `<div>${contacts[i]}</div>`;
-    }           
-}
+    if (contacts[i].name.includes(inputel)){
+        divstr += gethtmlstr(contacts[i], [i]);//`<div>${contacts[i]}</div>`;
+    }          
+  }
   outputEl.innerHTML = divstr;
 }
 
@@ -81,13 +105,29 @@ function displayByCountry() {
   let inputel = prompt("what is contry");
   let divstr = "";
   for (let i = 0; i < contacts.length; i++){ 
-    if (contacts.includes(inputel)){
-        divstr += `<div>${contacts[i]}</div>`;
+    if (contacts[i].contry.includes(inputel)){
+        divstr += gethtmlstr(contacts[i], i);//`<div>${contacts[i]}</div>`;
     }           
-}
+  }
   outputEl.innerHTML = divstr;
 }
 
+function findbyemail(){
+  let input = prompt("EMAIL");
+  let index = -1;
+  let divstr = "";
+  for (let i = 0; i < contacts.length; i++){ 
+    if (contacts[i].email.includes(input)){
+        index = i;
+    }           
+  }
+  if (index === -1) {
+    divstr = "NO"
+  } else {
+    divstr = gethtmlstr(contacts[index], index);
+  } 
+  outputEl.innerHTML = divstr
+}
 //OTHER FUNCTIONS
 
 function newcontact(contactname, contactnumber, contactemail, contactcontry){
