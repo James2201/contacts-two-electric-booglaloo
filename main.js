@@ -48,9 +48,8 @@ function addContact() {
   let email = prompt("EMAIL");
   let contry = prompt("where do you live");
   let result = 0;
-
   for (let i = 0; i < contacts.length; i++){
-    if (contacts[i].email.includes(email)){
+    if (contacts[i].email === email){
       result = 1;
     }
   }
@@ -76,15 +75,7 @@ function removeContact() {
     } else if (answer === -1) {
       outputEl.innerHTML = "NO"
     }
-  }
-    // if (index >= 0 && index < contacts.length){
-    //   outputEl.innerHTML = `contact removed, contact email: (${contacts[index].name})`;
-    //   contacts.splice(index, 1);
-    //   console.log(index);
-    // } else {
-    //   alert("no");
-    // }
-  
+  } 
   savecontacts();
 }
 
